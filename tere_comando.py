@@ -17,7 +17,7 @@ def send_sms(recipients, message):
 	recipients = ["591" + recipt for recipt in recipients]
 	to = " ".join(recipients)
 	text = "&text=" + urllib.quote(message)
-	url = "/cgi-bin/sendsms?username=monnet&password=monnet&to=" + urllib.quote(to) + text
+	url = "/cgi-bin/sendsms?username=usr&password=pass&to=" + urllib.quote(to) + text
 	print url
 	conn.request("GET", url)
 	response = conn.getresponse()
