@@ -10,11 +10,18 @@ def get_sim_numbers():
 	if len(SIM_NUMBERS) >= 8:
 		return SIM_NUMBERS.replace(" ","").split(",")
 
+def add_cc(num):
+	if num[0:4] != "4671":
+		return "591" + num
+	else:
+		return num
+
 
 def send_sms(recipients, message):
     print(recipients)
     conn = httplib.HTTPConnection(SMS_SERVICES_IP, SMS_SERVICES_PORT)
-    recipients = ["591" + recipt for recipt in recipients]
+    #recipients = ["591" + recipt for recipt in recipients]
+    recipients = [add_cc(recipt) for recipt in recipients]
     to = " ".join(recipients)
     text = "&text=" + urllib.quote(message)
     url_auth = "/cgi-bin/sendsms?username={0}&password={1}&to=".format(USR,PWD)
